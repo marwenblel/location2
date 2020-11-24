@@ -1,0 +1,11 @@
+name = Location2
+description = This module allows administrators to define field type location composed with both country-state data.
+package = field
+dependencies[] = field
+dependencies[] = taxonomy
+
+core = 7.x
+files[] = location2.install
+files[] = location2.module
+
+# version: 1.0

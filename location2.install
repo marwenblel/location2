@@ -1,0 +1,47 @@
+<?php
+/**
+ * @file
+ * Install / Uninstall / Update functions of Location2 module
+ */
+
+/**
+ * Implements hook_install().
+ */
+function location2_install () {
+    $location = (object) array(
+        'name' => 'Location',
+        'description' => 'This vocabulary was created to store country / state',
+        'machine_name' => 'location',
+    );
+
+    taxonomy_vocabulary_save($location);
+}
+/**
+ * Implements hook_uninstall().
+ */
+function location2_uninstall () {
+    $location = taxonomy_vocabulary_machine_name_load('location');
+    if ($location) {
+        taxonomy_vocabulary_delete($location->vid);
+    }
+}
+/**
+ * Implements hook_field_schema().
+ */
+function location2_field_schema ($field) {
+    $field = array(
+        'columns' => array(
+            'country' => array(
+                'type'     => 'varchar',
+                'length'   => 30,
+                'not null' => TRUE,
+            ),
+            'state' => array(
+                'type'     => 'varchar',
+                'length'   => 30,
+                'not null' => FALSE,
+            ),
+        ),
+    );
+    return $field;
+}
